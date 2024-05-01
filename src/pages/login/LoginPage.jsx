@@ -9,7 +9,7 @@ export const LoginPage = () => {
     return (
         <Container className="d-flex justify-content-center  mt-5 p-5">
             <Form className="m-5 p-5 pt-3 bg-body-tertiary rounded-4 w-50 shadow">
-                <p className="fs-1">Sign In</p>
+                <p className="fs-1 fw-semibold">Sign In</p>
                 <Form.Group className="mb-3">
                     <FloatingLabel controlId="floatingInput" label="Email address" >
                         <Form.Control type="email" placeholder="name@example.com" />
