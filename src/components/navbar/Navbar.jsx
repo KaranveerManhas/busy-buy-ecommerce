@@ -77,9 +77,6 @@ const styles = {
   colorModeIcon: {
     width: '30px',
     height: '30px',
-    // position: 'absolute',
-    // top: '13px',
-    // right: '-40px',
     cursor: 'pointer'
   }
 }
