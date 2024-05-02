@@ -46,9 +46,9 @@ export const NavbarComponent = () => {
               <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} />
               Sign In
               </NavLink>
+            <img src="/images/colorModes.png" style={styles.colorModeIcon} onClick={toggleColorMode} alt="Color Mode icon" />
           </Nav>
         </Navbar.Collapse>
-        <img src="/images/colorModes.png" style={styles.colorModeIcon} onClick={toggleColorMode} alt="Color Mode icon" />
       </Container>
     </Navbar>
     <Outlet />
@@ -77,9 +77,9 @@ const styles = {
   colorModeIcon: {
     width: '30px',
     height: '30px',
-    position: 'absolute',
-    top: '13px',
-    right: '-40px',
+    // position: 'absolute',
+    // top: '13px',
+    // right: '-40px',
     cursor: 'pointer'
   }
 }
