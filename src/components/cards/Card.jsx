@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 export const CardComponent = ({product}) => {
   return (
-    <div className="d-flex justify-content-center flex-wrap rounded-2 p-4 shadow bg-body-tertiary" style={styles.card}>
+    <div className="d-flex justify-content-center flex-wrap rounded-2 p-4 shadow bg-body" style={styles.card}>
       <div style={styles.imageContainer} className="d-flex align-items-center justify-content-center">
         <img src={product.image} alt={product.title} style={styles.image} />
       </div>

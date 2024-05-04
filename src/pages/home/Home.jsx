@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import { GridLoader } from 'react-spinners';
+import { FilterComponent } from "../../components/filter_component/filterComponent";
+import { HeaderComponent } from "../../components/header/headerComponent";
 
 
 const override = {
@@ -31,19 +33,23 @@ export const Home = () => {
     }, [])
 
     return (
-        <div style={{height: "85vh"}}>
-            <Container className="d-flex flex-wrap justify-content-evenly gap-4 mt-5 p-3 h-100">
-                {isLoading ? 
-                <GridLoader 
-                    color="#ff9a01"
-                    loading={isLoading}
-                    cssOverride={override}
-                    size={20}
-                    aria-label="Loading Products"
-                    data-testid="loader"
-                />
-                 : 
-                products.map((product) => <CardComponent product={product} />)}
+        <div>
+            <HeaderComponent />
+            <Container className="d-flex gap-2">
+                <FilterComponent />
+                <Container className="d-flex flex-wrap gap-4">
+                    {isLoading ? 
+                    <GridLoader 
+                        color="#ff9a01"
+                        loading={isLoading}
+                        cssOverride={override}
+                        size={20}
+                        aria-label="Loading Products"
+                        data-testid="loader"
+                    />
+                    : 
+                    products.map((product) => <CardComponent product={product} />)}
+                </Container>
             </Container>
         </div>
         
