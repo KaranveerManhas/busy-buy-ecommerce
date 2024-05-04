@@ -7,9 +7,9 @@ import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 export const SignupPage = () => {
 
     return (
-        <Container className="d-flex justify-content-center  mt-5 p-5">
-            <Form className="m-5 p-5 pt-3 bg-body-tertiary rounded-4 w-50 shadow">
-                <p className="fs-1 fw-semibold">Sign Up</p>
+        <Container className="d-flex justify-content-center align-content-center mt-5 p-sm-5">
+            <Form className="p-5 bg-body-tertiary rounded-4 shadow w-sm-50 text-center">
+                <Form.Label className="fs-1 fw-semibold">Sign Up</Form.Label>
                 <Form.Group className="mb-3">
                     <FloatingLabel controlId="floatingName" label="Your Name" >
                         <Form.Control type="name" placeholder="Name" />
@@ -27,7 +27,7 @@ export const SignupPage = () => {
                 </Form.Group>
                 <Button variant="danger" style={styles.button} type="submit">Sign Up</Button>
             </Form>
-        </Container>
+         </Container>
     )
 }
 
