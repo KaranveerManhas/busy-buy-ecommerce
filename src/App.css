@@ -8,3 +8,7 @@ html {
   width: 100%;
   scrollbar-gutter: stable;
 }
+
+.App {
+  min-height: 100vh;
+}

@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/Navbar';
 import { Home } from './pages/home/Home';
 import { LoginPage } from './pages/login/LoginPage';
 import { SignupPage } from './pages/signup/SignupPage';
+import { Cart } from './pages/cart/cart';
 
 function App() {
 
@@ -23,6 +24,10 @@ function App() {
         {
           path: "signup",
           element: <SignupPage />
+        },
+        {
+          path: "cart",
+          element: <Cart />
         }
       ]
     }

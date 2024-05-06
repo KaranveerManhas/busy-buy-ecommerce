@@ -1,7 +1,13 @@
 import React from 'react'
+import Form from 'react-bootstrap/Form';
 
 export const HeaderComponent = () => {
   return (
-    <div className="text-center m-5 p-3">headerComponent</div>
+    <header className="text-center m-5 p-3">
+      <Form className="d-flex justify-content-center mb-3">
+        <Form.Control type="text" placeholder="Search for item" className="w-50 border-primary" />
+      </Form>
+    </header>
   )
 }
+
