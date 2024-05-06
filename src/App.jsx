@@ -5,6 +5,7 @@ import { Home } from './pages/home/Home';
 import { LoginPage } from './pages/login/LoginPage';
 import { SignupPage } from './pages/signup/SignupPage';
 import { Cart } from './pages/cart/cart';
+import { OrderPage } from './pages/order/OrderPage';
 
 function App() {
 
@@ -28,6 +29,10 @@ function App() {
         {
           path: "cart",
           element: <Cart />
+        },
+        {
+          path: "orders",
+          element: <OrderPage />
         }
       ]
     }
