@@ -48,7 +48,7 @@ export const Home = () => {
                         data-testid="loader"
                     />
                     : 
-                    products.map((product) => <CardComponent product={product} />)}
+                    products.map((product) => <CardComponent product={product} key={product.id} />)}
                 </Container>
             </Container>
         </div>

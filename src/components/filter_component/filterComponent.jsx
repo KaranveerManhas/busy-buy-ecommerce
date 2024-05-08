@@ -20,8 +20,9 @@ export const FilterComponent = () => {
                 <input type="range" name="price_range" id="priceRange" min={0} max={10000} step={1} onChange={handleChange} />
                 <div className="category mt-3">
                     <Form.Label className="mb-3 fw-semibold fs-4">Categories</Form.Label>
-                    {categories.map((category) => 
+                    {categories.map((category, index) => 
                         <Form.Check
+                        key={index}
                         type='checkbox'
                         id={category}
                         label={category}

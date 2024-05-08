@@ -7,6 +7,8 @@ import { SignupPage } from './pages/signup/SignupPage';
 import { Cart } from './pages/cart/cart';
 import { OrderPage } from './pages/order/OrderPage';
 
+import { UserContextProvider } from './contexts/userContext';
+
 function App() {
 
   const router = createBrowserRouter([
@@ -39,9 +41,12 @@ function App() {
   ])
 
   return (
-    <div className="App bg-body-tertiary">
-      <RouterProvider router={router} />
-    </div>
+    <UserContextProvider>
+      <div className="App bg-body-tertiary">
+        <RouterProvider router={router} />
+      </div>
+    </UserContextProvider>
+    
   );
 }
 

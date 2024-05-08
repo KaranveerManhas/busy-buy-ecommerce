@@ -30,11 +30,10 @@ export const NavbarComponent = () => {
   return (
     <>
     <Navbar expand="lg" className="bg-body shadow">
-      <Container className="position-relative">
-        <Navbar.Brand href="/" className="fs-2">
+      <Container>
+        <div className="fs-2">
           <NavLink to={'/'} style={styles.link}>BUSY BUY</NavLink>
-        </Navbar.Brand>
-        <Navbar.Toggle />
+        </div>
         <Navbar.Collapse className="justify-content-end">
           <Nav className="gap-3">
             <NavLink to={'/'} style={styles.link}>
