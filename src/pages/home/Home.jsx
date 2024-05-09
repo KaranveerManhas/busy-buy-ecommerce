@@ -35,9 +35,9 @@ export const Home = () => {
     return (
         <div>
             <HeaderComponent />
-            <Container className="d-flex gap-2">
+            <div className="d-flex container-md">
                 <FilterComponent />
-                <Container className="d-flex flex-wrap gap-4">
+                <Container className="d-flex flex-wrap gap-4 justify-content-sm-center">
                     {isLoading ? 
                     <GridLoader 
                         color="#ff9a01"
@@ -50,7 +50,7 @@ export const Home = () => {
                     : 
                     products.map((product) => <CardComponent product={product} key={product.id} />)}
                 </Container>
-            </Container>
+            </div>
         </div>
         
     )

@@ -13,7 +13,7 @@ export const FilterComponent = () => {
     }
 
     return (
-        <aside className="pt-3 p-4 mt-5 text-center w-25 bg-body-secondary position-sticky start-0 rounded-4" style={styles.aside}>
+        <aside className="pt-3 p-4 mt-5 text-center w-md-25 bg-body-secondary position-sticky start-0 rounded-4" style={styles.aside}>
             <p className="mb-3 fs-3 fw-semibold">Filters</p>
             <Form className="d-flex flex-column p-2">
                 <Form.Label>Price: {range}</Form.Label>
@@ -40,7 +40,8 @@ export const FilterComponent = () => {
 const styles = {
     aside: {
         height: "fit-content",
-        top: "100px"
+        top: "100px",
+        minWidth: "200px"
     }
 }
 

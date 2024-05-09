@@ -2,13 +2,28 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+import { useUserValue } from "../../contexts/userContext";
+
 
 
 export const SignupPage = () => {
 
+    const { handleUserSignUp} = useUserValue();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const user = {
+            name: e.target[0].value,
+            email: e.target[1].value,
+            password: e.target[2].value
+        };
+
+        handleUserSignUp(user);
+    }
+
     return (
         <Container className="d-flex justify-content-center align-content-center mt-5 p-sm-5">
-            <Form className="p-5 bg-body-tertiary rounded-4 shadow w-sm-50 text-center">
+            <Form className="p-5 bg-body-tertiary rounded-4 shadow w-sm-50 text-center" onSubmit={handleSubmit}>
                 <Form.Label className="fs-1 fw-semibold">Sign Up</Form.Label>
                 <Form.Group className="mb-3">
                     <FloatingLabel controlId="floatingName" label="Your Name" >
@@ -27,6 +42,7 @@ export const SignupPage = () => {
                 </Form.Group>
                 <Button variant="danger" style={styles.button} type="submit">Sign Up</Button>
             </Form>
+          
          </Container>
     )
 }

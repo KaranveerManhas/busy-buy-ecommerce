@@ -5,7 +5,8 @@ export const HeaderComponent = () => {
   return (
     <header className="text-center m-5 p-3">
       <Form className="d-flex justify-content-center mb-3">
-        <Form.Control type="text" placeholder="Search for item" className="w-50 border-primary" />
+        <Form.Label />
+        <Form.Control type="text" placeholder="Search for item" className="border-primary w-auto" />
       </Form>
     </header>
   )
