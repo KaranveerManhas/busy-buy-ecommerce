@@ -4,8 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+// import { onAuthStateChanged } from 'firebase/auth';
+// import { auth } from '../../firebaseConfig';
 import { useUserValue } from '../../contexts/userContext';
 
 
