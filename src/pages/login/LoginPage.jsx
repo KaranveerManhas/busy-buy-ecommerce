@@ -4,18 +4,19 @@ import Button from "react-bootstrap/esm/Button";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { onAuthStateChanged } from "firebase/auth";
+// import { onAuthStateChanged } from "firebase/auth";
 import { useUserValue } from "../../contexts/userContext";
-import { auth } from "../../firebaseConfig";
+import { useEffect } from "react";
+// import { auth } from "../../firebaseConfig";
 
 export const LoginPage = () => {
 
-    const {handleUserSignIn} = useUserValue();
+    const {handleUserSignIn, user} = useUserValue();
     const navigate = useNavigate();
 
-    onAuthStateChanged(auth, (user)=> {
-        if(user){
-            navigate('/');
+    useEffect(() => {
+        if(user) {
+            navigate("/");
         }
     })
 

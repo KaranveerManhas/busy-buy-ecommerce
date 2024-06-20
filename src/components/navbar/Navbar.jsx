@@ -59,8 +59,8 @@ export const NavbarComponent = () => {
                   <img src="/images/cart.png" alt="Cart Button" style={styles.homeIcon} />
                   Cart
                 </NavLink>
-                <NavLink to={"/signin"} style={styles.link}>
-                  <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} onClick={handleUserSignOut} />
+                <NavLink to={"/"} style={styles.link} onClick={handleUserSignOut} >
+                  <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} />
                   Sign Out
                 </NavLink>
               </> 
