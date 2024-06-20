@@ -37,7 +37,7 @@ export const Home = () => {
             <HeaderComponent />
             <div className="d-flex container-md">
                 <FilterComponent />
-                <Container className="d-flex flex-wrap gap-4 justify-content-sm-center">
+                <Container className="d-flex flex-wrap gap-4 justify-content-sm-start">
                     {isLoading ? 
                     <GridLoader 
                         color="#ff9a01"
