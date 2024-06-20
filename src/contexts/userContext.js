@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import { auth } from "../firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
-
+import { auth, db } from "../firebaseConfig";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { doc, setDoc } from "firebase/firestore";
+
 
 const userContext = createContext();
 
@@ -17,7 +17,6 @@ export const useUserValue = () => {
 export const UserContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
 
     const toastSuccess = (message) => {
         toast.success(message)
@@ -26,7 +25,43 @@ export const UserContextProvider = ({children}) => {
         toast.error(errMsg);
     }
 
-    const handleUserSignIn = () => {
+    const handleUserSignOut = () => {
+        signOut(auth)
+        .then(()=> {
+            setUser(null);
+            toastSuccess("User Signed Out Successfully");
+        })
+    }
+
+    const handleUserSignIn = async (userCredentials) => {
+
+        const {email, password} = userCredentials;
+
+        try {
+
+            await signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                setUser(userCredential.user);
+            });
+            toastSuccess("You have successfully signed in.");
+
+        }catch(err){
+            const errMessage = err.message;
+            const errCode = err.code;
+
+            switch(errCode) {
+                case "auth/invalid-credential":
+                    toastError("Invalid Credentials");
+                    break;
+                case "auth/invalid-email":
+                    toastError("The email is invalid.");
+                    break;
+                default:
+                    toastError(errMessage);
+                    break;
+            }
+
+        }
 
     }
 
@@ -36,10 +71,14 @@ export const UserContextProvider = ({children}) => {
 
             await createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
             .then((userCredentials) => {
+                const userRef = doc(db, 'users', userCredentials.user.uid);
+                setDoc(userRef, {
+                    name: newUser.name,
+                    email: userCredentials.user.email
+                });
                 setUser(userCredentials.user);
-                console.log(userCredentials.user);
             })
-
+            
             toastSuccess("You have successfully signed up.");
 
         }catch(err){
@@ -48,28 +87,24 @@ export const UserContextProvider = ({children}) => {
 
             switch(errCode){
                 case "auth/weak-password":
-                    setErrorMessage("The password is too weak.");
+                    toastError("The password is too weak.");
                     break;
                 case "auth/email-already-in-use":
-                    setErrorMessage("The email is already in use.");
+                    toastError("The email is already in use.");
                     break;
                 case "auth/invalid-email":
-                    setErrorMessage("The email is invalid.");
+                    toastError("The email is invalid.");
                     break;
                 default:
-                    setErrorMessage(errMessage);
+                    toastError(errMessage);
                     break;
             }
-
-            setTimeout(() => {
-                toastError(errorMessage);
-            }, 2000)
 
         }
     }
     
     return (
-        <userContext.Provider value={{user, setUser, error, setError, errorMessage, handleUserSignIn, handleUserSignUp}}>
+        <userContext.Provider value={{user, setUser, error, setError, handleUserSignIn, handleUserSignOut, handleUserSignUp}}>
             {children}
             <ToastContainer />
         </userContext.Provider>

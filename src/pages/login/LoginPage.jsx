@@ -2,13 +2,37 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { onAuthStateChanged } from "firebase/auth";
+import { useUserValue } from "../../contexts/userContext";
+import { auth } from "../../firebaseConfig";
 
 export const LoginPage = () => {
 
+    const {handleUserSignIn} = useUserValue();
+    const navigate = useNavigate();
+
+    onAuthStateChanged(auth, (user)=> {
+        if(user){
+            navigate('/');
+        }
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const userCreds = {
+            email: e.target[0].value,
+            password: e.target[1].value
+        }
+
+        handleUserSignIn(userCreds);
+    }
+
     return (
         <Container className="d-flex justify-content-center align-content-center mt-5 p-sm-5">
-            <Form className="p-5 bg-body-tertiary rounded-4 w-sm-100 shadow text-center">
+            <Form className="p-5 bg-body-tertiary rounded-4 w-sm-100 shadow text-center" onSubmit={handleSubmit}>
                 <Form.Label className="fs-1 fw-semibold mb-3">Sign In</Form.Label>
                 <Form.Group className="mb-3">
                     <FloatingLabel controlId="floatingInput" label="Email address" >

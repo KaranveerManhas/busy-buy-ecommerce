@@ -4,11 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
+import { useUserValue } from '../../contexts/userContext';
 
 
 export const NavbarComponent = () => {
 
   const [colorMode, setColorMode] = useState("light");
+  const {user, handleUserSignOut} = useUserValue();
+  
+  useEffect(() => {
+
+
+  })
 
   useEffect(() => {
 
@@ -40,11 +49,28 @@ export const NavbarComponent = () => {
               <img src="/images/home.png" style={styles.homeIcon} alt="Home button" />
               Home
             </NavLink>
-            
-            <NavLink to={"/signin"} style={styles.link}>
-              <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} />
-              Sign In
+            {user ? 
+              <>
+                <NavLink to={'/orders'} style={styles.link}>
+                  <img src="/images/orders.png" alt="Orders Button" style={styles.homeIcon} />
+                  Orders
+                </NavLink>
+                <NavLink to={'/cart'} style={styles.link}>
+                  <img src="/images/cart.png" alt="Cart Button" style={styles.homeIcon} />
+                  Cart
+                </NavLink>
+                <NavLink to={"/signin"} style={styles.link}>
+                  <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} onClick={handleUserSignOut} />
+                  Sign Out
+                </NavLink>
+              </> 
+              : 
+              <NavLink to={"/signin"} style={styles.link}>
+                <img src="/images/enter.png" alt="Sign in Button" style={styles.loginIcon} />
+                Sign In
               </NavLink>
+            }
+            
             <img src="/images/colorModes.png" style={styles.colorModeIcon} onClick={toggleColorMode} alt="Color Mode icon" />
           </Nav>
         </Navbar.Collapse>

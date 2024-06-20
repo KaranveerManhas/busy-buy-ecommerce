@@ -2,23 +2,33 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+
 import { useUserValue } from "../../contexts/userContext";
-
-
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 export const SignupPage = () => {
 
     const { handleUserSignUp} = useUserValue();
+    const navigate = useNavigate();
+
+    onAuthStateChanged(auth, (user)=> {
+        if(user) {
+            
+            navigate('/');
+        }
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {
+        const userDetails = {
             name: e.target[0].value,
             email: e.target[1].value,
             password: e.target[2].value
         };
 
-        handleUserSignUp(user);
+        handleUserSignUp(userDetails);
     }
 
     return (
