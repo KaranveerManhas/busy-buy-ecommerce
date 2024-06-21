@@ -14,10 +14,6 @@ export const NavbarComponent = () => {
   const [colorMode, setColorMode] = useState("light");
   const {user, handleUserSignOut} = useUserValue();
   
-  useEffect(() => {
-
-
-  })
 
   useEffect(() => {
 

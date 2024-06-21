@@ -5,17 +5,15 @@ import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 
 import { useUserValue } from "../../contexts/userContext";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { useEffect } from "react";
 
 export const SignupPage = () => {
 
-    const { handleUserSignUp} = useUserValue();
+    const {user, handleUserSignUp} = useUserValue();
     const navigate = useNavigate();
 
-    onAuthStateChanged(auth, (user)=> {
-        if(user) {
-            
+    useEffect(() => {
+        if(user){
             navigate('/');
         }
     })

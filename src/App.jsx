@@ -7,9 +7,15 @@ import { SignupPage } from './pages/signup/SignupPage';
 import { Cart } from './pages/cart/cart';
 import { OrderPage } from './pages/order/OrderPage';
 
-import { UserContextProvider } from './contexts/userContext';
+
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebaseConfig';
+import { useUserValue } from './contexts/userContext';
 
 function App() {
+
+  const { setUser } = useUserValue();
 
   const router = createBrowserRouter([
     {
@@ -40,12 +46,19 @@ function App() {
     }
   ])
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user)=> {
+      if(user){
+        setUser(user);
+      }
+    })
+  }, []);
+
+
   return (
-    <UserContextProvider>
       <div className="App bg-body-tertiary">
         <RouterProvider router={router} />
       </div>
-    </UserContextProvider>
     
   );
 }
