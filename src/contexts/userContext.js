@@ -74,7 +74,9 @@ export const UserContextProvider = ({children}) => {
                 const userRef = doc(db, 'users', userCredentials.user.uid);
                 setDoc(userRef, {
                     name: newUser.name,
-                    email: userCredentials.user.email
+                    email: userCredentials.user.email,
+                    cart: [],
+                    orders: []
                 });
                 setUser(userCredentials.user);
             })
