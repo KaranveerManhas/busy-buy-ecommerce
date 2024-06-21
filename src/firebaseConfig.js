@@ -7,12 +7,12 @@ import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAh4ZyLyCeOtuJxzeK-3CE1lZ8cCjZRCvs",
-  authDomain: "busy-buy-1ad10.firebaseapp.com",
-  projectId: "busy-buy-1ad10",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: "busy-buy-1ad10.appspot.com",
   messagingSenderId: "127874970541",
-  appId: "1:127874970541:web:159707bb776e11ee75a724"
+  appId: process.env.REACT_APP_APP_ID
 };
 
 // Initialize Firebase

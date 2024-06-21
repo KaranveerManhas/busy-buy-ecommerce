@@ -50,6 +50,7 @@ function App() {
     onAuthStateChanged(auth, (user)=> {
       if(user){
         setUser(user);
+        console.log(user.uid)
       }
     })
     //eslint-disable-next-line
