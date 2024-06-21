@@ -52,6 +52,7 @@ function App() {
         setUser(user);
       }
     })
+    //eslint-disable-next-line
   }, []);
 
 
