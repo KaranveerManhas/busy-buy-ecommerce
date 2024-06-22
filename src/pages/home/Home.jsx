@@ -1,11 +1,10 @@
 import Container from "react-bootstrap/esm/Container";
 import { CardComponent } from "../../components/cards/Card";
-import { useEffect, useState } from "react";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+
 import { GridLoader } from 'react-spinners';
 import { FilterComponent } from "../../components/filter_component/filterComponent";
 import { HeaderComponent } from "../../components/header/headerComponent";
+import { useProductsValue } from "../../contexts/productContext";
 
 
 const override = {
@@ -15,22 +14,8 @@ const override = {
 
 export const Home = () => {
 
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const {products, isLoading} = useProductsValue();
     
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch("https://fakestoreapi.com/products");
-            const data = await response.json();
-            setProducts(data);
-        }
-        fetchData();
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-
-    }, [])
 
     return (
         <div>

@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import { useUserValue } from './contexts/userContext';
+import { ProductsContextProvider } from './contexts/productContext';
 
 function App() {
 
@@ -50,7 +51,6 @@ function App() {
     onAuthStateChanged(auth, (user)=> {
       if(user){
         setUser(user);
-        console.log(user.uid)
       }
     })
     //eslint-disable-next-line
@@ -58,9 +58,11 @@ function App() {
 
 
   return (
+    <ProductsContextProvider>
       <div className="App bg-body-tertiary">
         <RouterProvider router={router} />
       </div>
+    </ProductsContextProvider>
     
   );
 }
