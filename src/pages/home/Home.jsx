@@ -53,7 +53,7 @@ export const Home = () => {
                 priceRange={priceRange}
                 setCategories={setCategories} />
 
-                <Container className="d-flex flex-wrap gap-4 justify-content-sm-start">
+                <Container className="d-flex flex-wrap gap-4 justify-content-sm-center">
                     {isLoading ? 
                     <GridLoader 
                         color="#ff9a01"

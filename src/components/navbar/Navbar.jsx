@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 
+import "./navbar.css";
+
 // import { onAuthStateChanged } from 'firebase/auth';
 // import { auth } from '../../firebaseConfig';
 import { useUserValue } from '../../contexts/userContext';
@@ -39,7 +41,8 @@ export const NavbarComponent = () => {
         <div className="fs-2">
           <NavLink to={'/'} style={styles.link}>BUSY BUY</NavLink>
         </div>
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Toggle aria-controls='nav' className='custom-toggler' />
+        <Navbar.Collapse id='nav' className="justify-content-end">
           <Nav className="gap-3">
             <NavLink to={'/'} style={styles.link}>
               <img src="/images/home.png" style={styles.homeIcon} alt="Home button" />
