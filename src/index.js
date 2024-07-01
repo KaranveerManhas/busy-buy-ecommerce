@@ -5,6 +5,8 @@ import App from './App';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { UserContextProvider } from './contexts/userContext';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <UserContextProvider>
