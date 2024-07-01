@@ -10,9 +10,10 @@ import { OrderPage } from './pages/order/OrderPage';
 
 import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebaseConfig';
+import { auth, db } from './firebaseConfig';
 import { useUserValue } from './contexts/userContext';
 import { ProductsContextProvider } from './contexts/productContext';
+import { doc, getDoc } from 'firebase/firestore';
 
 function App() {
 
@@ -50,7 +51,19 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user)=> {
       if(user){
-        setUser(user);
+        
+        const getUser = async () => {
+
+          const userRef = doc(db, 'users', user.uid);
+
+          const userDoc = await getDoc(userRef);
+
+          setUser(userDoc.data());
+
+        };
+
+        getUser();
+
       }
     })
     //eslint-disable-next-line

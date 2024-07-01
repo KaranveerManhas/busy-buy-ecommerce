@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 const userContext = createContext();
@@ -40,8 +40,11 @@ export const UserContextProvider = ({children}) => {
         try {
 
             await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                setUser(userCredential.user);
+            .then(async (userCredential) => {
+                const docRef = doc(db, 'users', userCredential.user.uid);
+
+                const user = await getDoc(docRef);
+                setUser(user.data());
             });
             toastSuccess("You have successfully signed in.");
 
@@ -77,8 +80,15 @@ export const UserContextProvider = ({children}) => {
                     email: userCredentials.user.email,
                     cart: [],
                     orders: []
+                }).then(async () => {
+
+                    const docRef = doc(db, 'users', userCredentials.user.uid);
+
+                    const user = await getDoc(docRef);
+                    setUser(user.data());
+
                 });
-                setUser(userCredentials.user);
+                
             })
             
             toastSuccess("You have successfully signed up.");

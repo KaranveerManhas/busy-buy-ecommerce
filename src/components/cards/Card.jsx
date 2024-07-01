@@ -2,23 +2,22 @@ import Button from 'react-bootstrap/Button';
 
 import { db } from '../../firebaseConfig';
 import { auth } from '../../firebaseConfig';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { useUserValue } from '../../contexts/userContext';
 
 
 export const CardComponent = ({product}) => {
+
+  const { user } = useUserValue();
 
   const addToCart = async (product) => {
 
     try {
 
-      const user = auth.currentUser;
-
-      const docRef = doc(db, "users", user.uid);
-      const userDetails = await getDoc(docRef);
-      const userData = userDetails.data();
+      const docRef = doc(db, "users", auth.currentUser.uid);
 
       
-      let cart = userData.cart;
+      let cart = user.cart;
 
         // Find the index of the product to update
       const productIndex = cart.findIndex(item => item.id === product.id);
@@ -34,11 +33,13 @@ export const CardComponent = ({product}) => {
       
       else {
         // Add the product to the cart
+        cart.push(product);
         await updateDoc(docRef, {
           cart: arrayUnion({...product, quantity: 1})
         })
 
       }
+
 
     }catch(err){
 
