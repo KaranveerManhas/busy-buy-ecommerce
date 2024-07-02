@@ -1,14 +1,25 @@
 import Container from "react-bootstrap/esm/Container";
+import { GridLoader } from 'react-spinners';
 import { useUserValue } from "../../contexts/userContext"
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
+
+
+
+const override = {
+  display: 'block',
+  margin: '100px auto 0'
+}
+
 
 export const Cart = () => {
 
     const { user, setUser } = useUserValue();
     const [total, setTotal] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const getUser = async () => {
@@ -64,16 +75,54 @@ export const Cart = () => {
       }
     }
 
+    const handleUserCheckout = async () => {
+
+      if(user.cart.length > 0){
+
+        const allProducts = user.cart.reduce((products, currentProduct)=> {
+          return [...products, {
+            id: currentProduct.id,
+            title: currentProduct.title,
+            price: currentProduct.price,
+            quantity: currentProduct.quantity,
+          }];
+        }, []);
+
+        const currentOrder = {
+          products: allProducts,
+          total: total,
+          date: new Date().toLocaleDateString(),
+        }
+        
+        const docRef = doc(db, 'users', auth.currentUser.uid);
+
+        await updateDoc(docRef, {
+          orders: [...user.orders, currentOrder]
+        });
+
+        navigate('/orders');
+
+      }
+
+    }
 
     if (!user){
-      return <div>Loading...</div>
+      return <Container>
+        <GridLoader 
+          color="#ff9a01"
+          cssOverride={override}
+          size={20}
+          aria-label="Loading Products"
+          data-testid="loader"
+        />
+      </Container>
     }
 
     return (
         <div className="text-center">
             <h1 className="p-3">Cart</h1>
-            <h2>Total : {total} </h2>
-            <Button>Checkout</Button>
+            <h3>Total : {total} </h3>
+            <Button className="mt-3" onClick={handleUserCheckout}>Checkout</Button>
             <Container >
                 <div className="cart-items d-flex gap-3 justify-content-center p-5">
                     {user.cart.map((product, index) => (
@@ -86,7 +135,7 @@ export const Cart = () => {
                             <h5 className="fw-bold">$ {product.price}</h5>
                             <div className="qty-container d-flex justify-content-center align-content-center">
                                 <Button className="fs-5 btn-danger rounded-0" onClick={e=>reduceProductQuantity(product)}>&#8722;</Button>
-                                <div className="fs-5 bg-body-secondary" style={styles.qtyText}>{product.quantity}</div>
+                                <div className="fs-4 bg-body-secondary" style={styles.qtyText}>{product.quantity}</div>
                                 <Button className="fs-5 btn-success rounded-0" onClick={e=>increaseProductQuantity(product)}>&#43;</Button>
                             </div>
                         </div>
