@@ -5,7 +5,7 @@ import { Home } from './pages/home/Home';
 import { LoginPage } from './pages/login/LoginPage';
 import { SignupPage } from './pages/signup/SignupPage';
 import { Cart } from './pages/cart/cart';
-import { OrderPage } from './pages/order/OrderPage';
+import { OrderPage } from './pages/orders/OrderPage';
 
 
 import { useEffect } from 'react';

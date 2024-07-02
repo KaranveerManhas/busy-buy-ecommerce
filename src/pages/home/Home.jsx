@@ -23,7 +23,7 @@ export const Home = () => {
         electronics: false,
         jewelry: false,
         womensClothing: false
-    })
+    });
 
     const [isFiltering, setIsFiltering] = useState(false);
 
