@@ -97,8 +97,15 @@ export const Cart = () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
 
         await updateDoc(docRef, {
-          orders: [...user.orders, currentOrder]
+          orders: [...user.orders, currentOrder],
+          cart: []
         });
+
+        setUser({
+          ...user,
+          orders: [...user.orders, currentOrder],
+          cart: []
+        })
 
         navigate('/orders');
 
